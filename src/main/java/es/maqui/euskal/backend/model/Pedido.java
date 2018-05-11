@@ -5,8 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import es.maqui.euskal.backend.repository.Identificable;
+
 @Entity
-public class Pedido {
+public class Pedido implements Identificable<Long>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6553492524378565619L;
 
 	@Id
 	@GeneratedValue
@@ -18,14 +25,16 @@ public class Pedido {
 	@Column(name = "PEDIDO")
 	private String pedido;
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
-		this.id = id;
+		this.id=id;
 	}
-
+	
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}

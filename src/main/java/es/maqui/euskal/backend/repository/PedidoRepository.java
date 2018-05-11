@@ -1,6 +1,7 @@
 package es.maqui.euskal.backend.repository;
 
-public interface PedidoRepository{
+import es.maqui.euskal.backend.model.Pedido;
 
+public interface PedidoRepository extends RepositorioGenerico<Long, Pedido> {
 
 }
