@@ -4,10 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import es.maqui.euskal.backend.repository.Identificable;
 
 @Entity
+@Table(name = "PEDIDO")
 public class Pedido implements Identificable<Long>{
 
 	/**
