@@ -16,6 +16,5 @@ public class VaadinUI extends UI {
 	protected void init(VaadinRequest request) {
 		
 	}
-	// end::listCustomers[]
 
 }
