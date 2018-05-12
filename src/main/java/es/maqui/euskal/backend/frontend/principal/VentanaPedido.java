@@ -12,9 +12,6 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import es.maqui.euskal.backend.model.Pedido;
-
-import es.maqui.euskal.backend.repository.PedidoRepository;
 
 /**
  * A simple example to introduce building forms. As your real application is probably much
@@ -27,14 +24,14 @@ import es.maqui.euskal.backend.repository.PedidoRepository;
  */
 @SpringComponent
 @UIScope
-public class VentanaPedido extends VerticalLayout {
+public class PedidoEditor extends VerticalLayout {
 
 	private final PedidoRepository repository;
 
 	/**
 	 * The currently edited Pedido
 	 */
-	private Pedido pedido;
+	private Pedido Pedido;
 
 	/* Fields to edit properties in Pedido entity */
 	TextField firstName = new TextField("First name");
@@ -46,16 +43,16 @@ public class VentanaPedido extends VerticalLayout {
 	Button delete = new Button("Delete", VaadinIcons.TRASH);
 	CssLayout actions = new CssLayout(save, cancel, delete);
 
-//	Binder<Pedido> binder = new Binder<>(Pedido.class);
+	Binder<Pedido> binder = new Binder<>(Pedido.class);
 
 	@Autowired
-	public VentanaPedido(PedidoRepository repository) {
+	public PedidoEditor(PedidoRepository repository) {
 		this.repository = repository;
 
 		addComponents(firstName, lastName, actions);
 
 		// bind using naming convention
-//		binder.bindInstanceFields(this);
+		binder.bindInstanceFields(this);
 
 		// Configure and style components
 		setSpacing(true);
@@ -64,8 +61,9 @@ public class VentanaPedido extends VerticalLayout {
 		save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
 		// wire action buttons to save, delete and reset
-		save.addClickListener(e -> repository.add(pedido));
-		delete.addClickListener(e -> repository.delete(pedido));
+		save.addClickListener(e -> repository.save(Pedido));
+		delete.addClickListener(e -> repository.delete(Pedido));
+		cancel.addClickListener(e -> editPedido(Pedido));
 		setVisible(false);
 	}
 
@@ -73,6 +71,35 @@ public class VentanaPedido extends VerticalLayout {
 
 		void onChange();
 	}
+
+	public final void editPedido(Pedido c) {
+		if (c == null) {
+			setVisible(false);
+			return;
+		}
+		final boolean persisted = c.getId() != null;
+		if (persisted) {
+			// Find fresh entity for editing
+			Pedido = repository.findById(c.getId()).get();
+		}
+		else {
+			Pedido = c;
+		}
+		cancel.setVisible(persisted);
+
+		// Bind Pedido properties to similarly named fields
+		// Could also use annotation or "manual binding" or programmatically
+		// moving values from fields to entities before saving
+		binder.setBean(Pedido);
+
+		setVisible(true);
+
+		// A hack to ensure the whole form is visible
+		save.focus();
+		// Select all text in firstName field automatically
+		firstName.selectAll();
+	}
+
 	public void setChangeHandler(ChangeHandler h) {
 		// ChangeHandler is notified when either save or delete
 		// is clicked
