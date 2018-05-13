@@ -38,7 +38,7 @@ public class VentanaPedidos extends VerticalLayout {
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPedidos, true))) {
 
 					bw.write(pedidosLista+"\n");
-					Notification.show("Enviado !!");
+					Notification.show(ficheroPedidos.getAbsolutePath());
 					
 				} catch (Exception exception) {
 					LOG.warning("Liada Parda: " + exception.getMessage());
