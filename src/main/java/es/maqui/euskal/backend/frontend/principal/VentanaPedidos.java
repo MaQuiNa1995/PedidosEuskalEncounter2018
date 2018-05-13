@@ -33,7 +33,7 @@ public class VentanaPedidos extends VerticalLayout {
 			String pedidosLista = areaPedidos.getValue();
 
 			if (!nombreUsuario.isEmpty() && (!pedidosLista.isEmpty())) {
-				File ficheroPedidos = new File(nombreUsuario);
+				File ficheroPedidos = new File(nombreUsuario+".txt");
 
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPedidos, true))) {
 
