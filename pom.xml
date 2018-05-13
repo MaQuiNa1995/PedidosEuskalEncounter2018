@@ -81,6 +81,7 @@
 					<scanIntervalSeconds>2</scanIntervalSeconds>
 				</configuration>
 			</plugin>
+
 			<!-- Heroku plugin necesario para desplegar en su servidor -->
 			<plugin>
 				<groupId>com.heroku.sdk</groupId>
@@ -88,6 +89,5 @@
 				<version>2.0.3</version>
 			</plugin>
 		</plugins>
-	</build>
-
+</build>
 </project>

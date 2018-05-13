@@ -38,10 +38,13 @@ public class VentanaPedidos extends VerticalLayout {
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPedidos, true))) {
 
 					bw.write(pedidosLista+"\n");
-
+					Notification.show("Enviado !!");
+					
 				} catch (Exception exception) {
 					LOG.warning("Liada Parda: " + exception.getMessage());
+					Notification.show("Hubo una liada parda avisa a maqui");
 				}
+				
 			}else {
 				Notification.show("Ni el nombre ni los pedidos pueden ser nulos");
 			}
