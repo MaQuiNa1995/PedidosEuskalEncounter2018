@@ -26,6 +26,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<vaadin.version>8.3.1</vaadin.version>
 		<hibernate.version>5.1.0.Final</hibernate.version>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
 	</properties>
 
 	<!-- Dependencias -->
@@ -62,32 +63,21 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<!-- Jetty plugin -->
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.3.9.v20160517</version>
-				<configuration>
-					<scanIntervalSeconds>2</scanIntervalSeconds>
-				</configuration>
-			</plugin>
-
-			<!-- Heroku plugin necesario para desplegar en su servidor -->
-			<plugin>
 				<groupId>com.heroku.sdk</groupId>
 				<artifactId>heroku-maven-plugin</artifactId>
-				<version>2.0.3</version>
+				<version>1.1.1</version>
+				<configuration>
+					<appName>PedisoEuskal</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>${basedir}/${full-artifact-name}</include>
+					</includes>
+					<jdkVersion>1.8</jdkVersion>
+					<processTypes>
+						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+					</processTypes>
+				</configuration>
 			</plugin>
 		</plugins>
-</build>
+	</build>
 </project>
