@@ -26,7 +26,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<vaadin.version>8.3.1</vaadin.version>
 		<hibernate.version>5.1.0.Final</hibernate.version>
-		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+		<start-class>es.maqui.euskal.backend.main.Main</start-class>
 	</properties>
 
 	<!-- Dependencias -->
@@ -45,9 +45,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
+		
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -60,7 +60,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<build>
+		<build>
 		<plugins>
 			<plugin>
 				<groupId>com.heroku.sdk</groupId>
@@ -92,6 +92,65 @@
 					</archive>
 				</configuration>
 			</plugin>
+
+			<!-- Jetty plugin -->
+			<plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+			<version>9.3.9.v20160517</version>
+			<configuration>
+			<scanIntervalSeconds>2</scanIntervalSeconds>
+			</configuration>
+			</plugin>
+			
+
+			<!-- Heroku plugin necesario para desplegar en su servidor -->
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
 		</plugins>
 	</build>
 </project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <dependency> -->
+<!-- <groupId>org.springframework.boot</groupId> -->
+<!-- <artifactId>spring-boot-starter-jetty</artifactId> -->
+<!-- </dependency> -->
+<!-- <dependency> -->
+<!-- <groupId>org.springframework.boot</groupId> -->
+<!-- <artifactId>spring-boot-starter-actuator</artifactId> -->
+<!-- </dependency> -->
+<!-- </dependencies> -->
+
+<!-- <properties> -->
+<!-- <start-class>hello.Application</start-class> -->
+<!-- </properties> -->
+
+<!-- <build> -->
+<!-- <plugins> -->
+<!-- <plugin> -->
+<!-- <groupId>org.springframework.boot</groupId> -->
+<!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+<!-- </plugin> -->
+<!-- </plugins> -->
+<!-- </build> -->
