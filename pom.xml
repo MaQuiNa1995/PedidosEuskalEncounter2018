@@ -7,6 +7,7 @@
 	<groupId>es.maqui</groupId>
 	<artifactId>pedidos_euskal</artifactId>
 	<version>1.0.0-RELEASE</version>
+	<packaging>war</packaging>
 
 	<prerequisites>
 		<maven>3</maven>
@@ -43,11 +44,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- marked the embedded servlet container as provided -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jetty</artifactId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -60,7 +63,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-		<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>com.heroku.sdk</groupId>
@@ -95,14 +98,14 @@
 
 			<!-- Jetty plugin -->
 			<plugin>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-maven-plugin</artifactId>
-			<version>9.3.9.v20160517</version>
-			<configuration>
-			<scanIntervalSeconds>2</scanIntervalSeconds>
-			</configuration>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.9.v20160517</version>
+				<configuration>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
+				</configuration>
 			</plugin>
-			
+
 
 			<!-- Heroku plugin necesario para desplegar en su servidor -->
 			<plugin>
@@ -114,7 +117,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 </project>
