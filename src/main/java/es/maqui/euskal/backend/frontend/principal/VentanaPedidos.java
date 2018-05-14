@@ -33,12 +33,12 @@ public class VentanaPedidos extends VerticalLayout {
 			String pedidosLista = areaPedidos.getValue();
 
 			if (!nombreUsuario.isEmpty() && (!pedidosLista.isEmpty())) {
-				File ficheroPedidos = new File("Pedidos.txt");
+				File ficheroPedidos = new File(nombreUsuario+".txt");
 
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPedidos, true))) {
 
 					bw.write(nombreUsuario+"\n"+pedidosLista+"\n");
-					Notification.show("Enviado a Maqui !!");
+					Notification.show(ficheroPedidos.getAbsolutePath());
 					
 				} catch (Exception exception) {
 					LOG.warning("Liada Parda: " + exception.getMessage());
