@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-//@EnableJpaRepositories("es.maqui.euskal.backend.repositorio")
 @ComponentScan("es.maqui.euskal.backend.modelo")
 @EntityScan(basePackages = "es.maqui.euskal.backend.modelo")
 @EnableAutoConfiguration
