@@ -25,7 +25,7 @@ public class Principal extends UI {
 	    setContent(new VentanaPedidos());
     }
     
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @WebServlet(urlPatterns = "/*", name = "ServeletPrincipal", asyncSupported = true)
     @VaadinServletConfiguration(ui = Principal.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
 

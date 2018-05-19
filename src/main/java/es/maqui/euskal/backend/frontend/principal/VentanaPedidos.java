@@ -5,13 +5,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+import es.maqui.euskal.backend.modelo.Pedido;
+import es.maqui.euskal.backend.repositorio.PedidoRepository;
+
 public class VentanaPedidos extends VerticalLayout {
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	/**
 	 * 
@@ -33,19 +41,14 @@ public class VentanaPedidos extends VerticalLayout {
 			String pedidosLista = areaPedidos.getValue();
 
 			if (!nombreUsuario.isEmpty() && (!pedidosLista.isEmpty())) {
-				File ficheroPedidos = new File(nombreUsuario+".txt");
 
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPedidos, true))) {
-
-					bw.write(nombreUsuario+"\n"+pedidosLista+"\n");
-					Notification.show(ficheroPedidos.getAbsolutePath());
-					
-				} catch (Exception exception) {
-					LOG.warning("Liada Parda: " + exception.getMessage());
-					Notification.show("Hubo una liada parda avisa a maqui");
-				}
+				Pedido pedido = new Pedido();
+				pedido.setLista(pedidosLista);
+				pedido.setNombreUsuario(nombreUsuario);
 				
-			}else {
+				pedidoRepository.save(pedido);
+
+			} else {
 				Notification.show("Ni el nombre ni los pedidos pueden ser nulos");
 			}
 		});

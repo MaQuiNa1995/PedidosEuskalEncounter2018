@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories
-@ComponentScan("es.maqui.euskal.backend")
+//@EnableJpaRepositories("es.maqui.euskal.backend.repositorio")
+@ComponentScan("es.maqui.euskal.backend.modelo")
 @EntityScan(basePackages = "es.maqui.euskal.backend.modelo")
 @EnableAutoConfiguration
 public class Main {

@@ -7,7 +7,6 @@
 	<groupId>es.maqui</groupId>
 	<artifactId>pedidos_euskal</artifactId>
 	<version>1.0.0-RELEASE</version>
-	<packaging>war</packaging>
 
 	<prerequisites>
 		<maven>3</maven>
@@ -26,7 +25,6 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<vaadin.version>8.3.1</vaadin.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
 		<start-class>es.maqui.euskal.backend.main.Main</start-class>
 	</properties>
 
@@ -36,10 +34,10 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -50,18 +48,29 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+         <exclusions>
+             <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.2.10.Final</version>
+    </dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -71,7 +80,6 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -86,24 +94,6 @@
 	</dependencyManagement>
 	<build>
 		<plugins>
-			<plugin>
-				<!-- Build an executable JAR -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>es.maqui.euskal.backend.main.Main</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-
-
-
 			<!-- Heroku plugin necesario para desplegar en su servidor -->
 			<plugin>
 				<groupId>com.heroku.sdk</groupId>
@@ -117,6 +107,7 @@
 
 		</plugins>
 	</build>
+	<packaging>war</packaging>
 </project>
 
 
